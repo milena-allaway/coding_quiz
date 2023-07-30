@@ -36,6 +36,7 @@ button {
     background-color: #2a6e6d;
     color: white;
     border-radius: 10px;
+    display: block;
 }
 
 button:hover {
