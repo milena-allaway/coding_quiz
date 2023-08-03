@@ -10,35 +10,48 @@
 </head>
 
 <header>
-    <p id="highscore">View High Score</p>
-    <p id="timer">Timer</p>
+    <p id="highscore">View High Scores</p>
+    <p id="timer">Time</p>
 </header>
 
 <body>
-    <!--Quiz Intro-->
+    <section>
+    <!-- Quiz Intro-->
     <!-- <div id="container">
         <h1>Coding Quiz Challenge</h1>
-        <p>some text</p> -->
+        <p>Answer the following questions related to JavaScript within the time limit. 
+            Every wrong answer will deduct 10 seconds from your time. Good luck!</p>  -->
         <!--Start Button-->
-        <!-- <div id="start">
-            <button class="startQuizButton">Start Quiz</button>
+        <div id="start">
+            <!-- <button class="startQuizButton">Start Quiz</button> -->
         </div>
-    </div> -->
+    </div>
 
     <!--Questions/Answer Area-->
-    <!-- <div id="quiz">
-        <p id="questions">Questions Here</p>
-        <div id="answer">
-            <button class="answerBtn">a</button><br>
-            <button class="answerBtn">b</button><br>
-            <button class="answerBtn">c</button><br>
-            <button class="answerBtn">d</button>
-        </div> --> 
-    
+    <div id="quiz" class = "hidden">
+        <div id="q1">
+            <p id="question"></p>
+            <div id="answer"></div> 
+        </div>
 
+
+    
+    </section>
         <!--Result-->
-        <!-- <div id="result">results here</div>
-    </div> -->
+        <div id="result" class = "hidden"></div>
+    </div>
+
+    <!--Submit Score-->
+    <div id = "saveInfo" class = "hidden">
+        <form id="form">
+            <p id="finalScore"></p>
+            <label for="initials">Save Your Highscore:</label>
+            <input type="text" name = "initials" id = "initials" placeholder = "Enter your initials"/>
+        </form>
+        <button id="saveScoreBtn">Submit</button>
+
+
+    </div>
     
 
 

@@ -4,7 +4,8 @@ header {
 
 #highscore {
     float: left;
-    width: 50%
+    width: 50%;
+    text-align: left;
 }
 
 #timer {
@@ -17,8 +18,11 @@ body {
     background-color: #cef5e5;
     padding: 40px;
 }
+.hidden {
+    display: none;
+}
 
-#container, #quiz, #result {
+#container, #result {
     text-align: center;
 }
 
@@ -26,6 +30,11 @@ h1 {
     padding: 10px;
     color: #043130;
     font-weight: bolder;
+}
+
+p {
+    font-size: 20px;
+    text-align: center;
 }
 
 button {
@@ -43,6 +52,17 @@ button {
 
 button:hover {
     background-color: #15a752;
+}
+
+button:active {
+    background-color: #36c1cb;
+}
+
+.startQuizButton {
+    margin-top:40px; 
+    width:200px; 
+    text-align:center; 
+    display:inline;
 }
 .answerBtn {
     display: block;
@@ -62,5 +82,17 @@ button:hover {
     font-size: 25px;
     font-style: oblique;
     border-top: 2px solid #108c44;
-    color:#108c44
+    color:#108c44;
+    text-align: center;
+}
+
+#saveInfo {
+    margin-top: 10%;
+    font-size: 22px;
+}
+
+#saveScoreBtn {
+    width: 200px;
+    text-align: center;
+    display: inline;
 }
