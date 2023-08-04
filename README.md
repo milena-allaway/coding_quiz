@@ -5,7 +5,7 @@ This is a timed quiz on JavaScript fundamentals. It stores high scores, so that 
 N/A no installation required
 
 # Usage
-When you visit (insert url) you will see a page that looks like this:
+When you visit https://milena-allaway.github.io/coding_quiz/ you will see a page that looks like this:
 ![Screenshot 2023-08-03 232753](https://github.com/milena-allaway/coding_quiz/assets/132115087/b5065191-1e0c-49cf-bc19-8ec0cb94db39)
 
 When you click the start button, a 60 second timer will start and you will be presented with questions with mupltiple choice answers. For every wrong answer, 10 seconds will be deducted from the clock. When you are done, or the clock runs out, your time left is your score. Your results will be saved in the local storage.
