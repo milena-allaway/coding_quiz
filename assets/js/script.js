@@ -1,4 +1,4 @@
-//Create elements for quiz
+//all variables/elements  for quiz
 var body = document.body;
 var section = document.createElement("section");
 var h1El = document.createElement("h1");
@@ -11,14 +11,16 @@ var resultEl = document.createElement("div");
 var result = document.createElement("p");
 var timerEl = document.getElementById("timer");
 var viewHs = document.getElementById("highscore");
-var secondsLeft = 60;
+var highScoreDiv = document.getElementById("hsPage");
+var scoreList = document.getElementById("scoreList");
 var questionIndex = 0;
-var quizTimer;
+var secondsLeft = 60;
+var quizTimer= "";
 var save = document.getElementById("saveInfo");
 var saveScoreBtn = document.getElementById("saveScoreBtn");
-var userScore;
 var userInitialsInput = document.getElementById("initials");
-var showScores;
+var showScores= "";
+var savedScores = [];
 
 var questions = [
     {
@@ -157,12 +159,14 @@ function finish () {
 };
 
 function saveUserInfo () {
-    userScore = {
+    var userScore = {
         Score: secondsLeft,
         Initials: userInitialsInput.value.trim()
-    }
-
-    localStorage.setItem("userScore", JSON.stringify(userScore));
+    };
+    //add userScore to saved array
+    savedScores.push(userScore);
+    //add to local storage - got help from my classmate 'Wes' on how to store multiple scores.
+    localStorage.setItem("userScores", JSON.stringify(savedScores));
 }
 
 saveScoreBtn.addEventListener("click", function(event) {
@@ -171,34 +175,30 @@ saveScoreBtn.addEventListener("click", function(event) {
     
 });
 
+// function goToScorePage() {
+//     body.innerHTML = "";
+//     getHighScores();
+//     highScoreDiv.classList.remove("hidden");
+//     scoreList.textContent = savedScores.length;
+//     for (var i = 0; i < savedScores.length; i++) {
+//         userScores = savedScores[i];
+
+//         var li = document.createElement("li");
+//         highScoreDiv.appendChild("li");
+//         li.textContent = userScores;
+        
+//     }
+// };
+
 function getHighScores () {
-    showScores = JSON.parse(localStorage.getItem('userScore'));
+    savedScores = JSON.parse(localStorage.getItem('userScores'));
 }
+// function clearScores () {
+//      localStorage.removeItem("userScores");
+//  }
 
-//     //Start questions
-// showNextQuestion();
 
-// function showNextQuestion() {
-//     var questionInsert = questions[questionIndex];
-//     var text = document.createElement("h1");
-//     text.textContent = questionInsert.question;
-//     body.appendChild(text);
-// };
 
-// //Show next question/finish quiz
-                // questionIndex++;
-                // if (questionIndex < questions.length) {
-                //     showNextQuestion();
-                // } else {
-                // finish();
-                // };
-// function finish () {
-//     answerBtn.setAttribute("style", "display: none");
-//     text.setAttribute("style", "display:none");
-//     var save = document.getElementById("saveInfo");
-//     save.classList.remove("hidden");
-//     body.appendChild(save);
-// };
 
 // testing for questions display
     // var questions = [
