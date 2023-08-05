@@ -138,6 +138,7 @@ function showNextQuestion() {
 
         };
         } else {
+            clearTimeout(quizTimer);
             finish();
         };
     body.appendChild(resultEl);
