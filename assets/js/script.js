@@ -15,11 +15,11 @@ var highScoreDiv = document.getElementById("hsPage");
 var scoreList = document.getElementById("scoreList");
 var questionIndex = 0;
 var secondsLeft = 60;
-var quizTimer= "";
+var quizTimer= null;
 var save = document.getElementById("saveInfo");
 var saveScoreBtn = document.getElementById("saveScoreBtn");
 var userInitialsInput = document.getElementById("initials");
-var showScores= "";
+var showScores= null;
 var savedScores = [];
 
 var questions = [
@@ -71,20 +71,17 @@ result.setAttribute("style", "font-style:oblique; font-size:25px; border-top: 2p
 
 //function to start the timer
 function startTimer() {
-    quizTimer = setInterval(function() {
-    secondsLeft--;
-    if(secondsLeft > 0) {
-        timerEl.textContent = "Time: " + secondsLeft;
-    } else if(secondsLeft <= 0) {
-        timerEl.textContent = "Time is up!";
-        clearInterval(quizTimer);
-        finish();
-    } else {
-        timerEl.textContent = "Time is up!";
-        clearInterval(quizTimer);
-        finish();
-    };  
-}, 1000);
+    quizTimer = setInterval(countdown, 1000);
+    function countdown(){
+        secondsLeft--;
+        if(secondsLeft > 0) {
+            timerEl.textContent = "Time: " + secondsLeft;
+        } else if(secondsLeft <= 0) {
+            clearTimeout(quizTimer);
+            timerEl.textContent = "Time is up!";
+            finish();
+        };
+    };
 };
 
 // Activate question section when "Start Quiz" is clicked
@@ -101,7 +98,7 @@ startBtn.addEventListener('click', function() {
 function showNextQuestion() {
     //clear quiz intro section
     quizDiv.innerHTML = "";
-    //bring back the timer
+    //bring back the timer + view highscore
     body.appendChild(timerEl);
     body.appendChild(viewHs);
     //body.setAttribute('style', 'margin-left: 25%');
@@ -124,32 +121,33 @@ function showNextQuestion() {
             answerBtn.addEventListener("click", function (event) {
                 var userAnswer = event.target.textContent;
                 if (userAnswer === questionInsert.correct) {
-                result.textContent = "Correct!";
-                } else if (questionIndex >= questions.length) {
-                    clearInterval(quizTimer);
+                    result.textContent = "Correct!";
+                } else if (questionIndex >= questions.length - 1) {
+                    clearTimeout(quizTimer);
                     finish ();
                 } else {
                     result.textContent = "Wrong!";
                     secondsLeft -= 10;
                 };
-                    //cyle to next question
-                    questionIndex ++;
-                    showNextQuestion();
+                //cyle to next question
+                questionIndex ++;
+                showNextQuestion();
+
             });
                     
 
         };
-    } else {
-        finish();
-    };
+        } else {
+            finish();
+        };
     body.appendChild(resultEl);
     resultEl.appendChild(result);
     resultEl.setAttribute('style', 'margin-left:25%; width:50%');
 };
 
 function finish () {
+    quizDiv.innerHTML = "";
     body.appendChild(viewHs);
-    clearInterval(quizTimer);
     body.appendChild(save);
     save.classList.remove("hidden");
     save.setAttribute('style', 'text-align: center');
@@ -167,35 +165,38 @@ function saveUserInfo () {
     savedScores.push(userScore);
     //add to local storage - got help from my classmate 'Wes' on how to store multiple scores.
     localStorage.setItem("userScores", JSON.stringify(savedScores));
-}
+};
 
 saveScoreBtn.addEventListener("click", function(event) {
     event.preventDefault();
     saveUserInfo();
+    goToScorePage();
     
 });
 
-// function goToScorePage() {
-//     body.innerHTML = "";
-//     getHighScores();
-//     highScoreDiv.classList.remove("hidden");
-//     scoreList.textContent = savedScores.length;
-//     for (var i = 0; i < savedScores.length; i++) {
-//         userScores = savedScores[i];
+function goToScorePage() {
+    // clearInterval(quizTimer);
+    body.innerHTML = "";
+    getHighScores();
+    body.appendChild(highScoreDiv);
+    highScoreDiv.classList.remove("hidden");
+    highScoreDiv.appendChild(scoreList);
+    scoreList.textContent = savedScores.length;
+    for (var i = 0; i < savedScores.length; i++) {
+        userScore = savedScores[i];
 
-//         var li = document.createElement("li");
-//         highScoreDiv.appendChild("li");
-//         li.textContent = userScores;
-        
-//     }
-// };
+        var li = document.createElement("li");
+        li.textContent = userScore.Initials + ": " + userScore.Score;
+        scoreList.appendChild(li);
+    }
+};
 
 function getHighScores () {
     savedScores = JSON.parse(localStorage.getItem('userScores'));
-}
+};
 // function clearScores () {
 //      localStorage.removeItem("userScores");
-//  }
+//  };
 
 
 
