@@ -162,7 +162,8 @@ function saveUserInfo () {
         Score: secondsLeft,
         Initials: userInitialsInput.value.trim()
     };
-    //add userScore to saved array
+
+    //add userScore to saved scores
     savedScores.push(userScore);
     //add to local storage - got help from my classmate 'Wes' on how to store multiple scores.
     localStorage.setItem("userScores", JSON.stringify(savedScores));
@@ -176,13 +177,12 @@ saveScoreBtn.addEventListener("click", function(event) {
 });
 
 function goToScorePage() {
-    // clearInterval(quizTimer);
     body.innerHTML = "";
     getHighScores();
     body.appendChild(highScoreDiv);
     highScoreDiv.classList.remove("hidden");
     highScoreDiv.appendChild(scoreList);
-    scoreList.textContent = savedScores.length;
+    scoreList.textContent = "High Scores";
     for (var i = 0; i < savedScores.length; i++) {
         userScore = savedScores[i];
 
