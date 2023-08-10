@@ -77,7 +77,7 @@ function startTimer() {
         if(secondsLeft > 0) {
             timerEl.textContent = "Time: " + secondsLeft;
         } else if(secondsLeft <= 0) {
-            clearTimeout(quizTimer);
+            clearInterval(quizTimer);
             timerEl.textContent = "Time is up!";
             finish();
         };
@@ -123,7 +123,7 @@ function showNextQuestion() {
                 if (userAnswer === questionInsert.correct) {
                     result.textContent = "Correct!";
                 } else if (questionIndex >= questions.length - 1) {
-                    clearTimeout(quizTimer);
+                    clearInterval(quizTimer);
                     finish ();
                 } else {
                     result.textContent = "Wrong!";
@@ -138,7 +138,7 @@ function showNextQuestion() {
 
         };
         } else {
-            clearTimeout(quizTimer);
+            clearInterval(quizTimer);
             finish();
         };
     body.appendChild(resultEl);
@@ -193,6 +193,7 @@ function goToScorePage() {
 };
 
 function getHighScores () {
+    savedScores.push(userScore);
     savedScores = JSON.parse(localStorage.getItem('userScores'));
 };
 // function clearScores () {
